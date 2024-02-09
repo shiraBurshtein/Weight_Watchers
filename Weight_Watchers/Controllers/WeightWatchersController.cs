@@ -20,7 +20,8 @@ namespace Subscriber.WebApi.Controllers
 
 
         // GET: api/<WeightWatchersController>
-        [HttpGet]
+        [HttpPost]
+        [Route("register")]
         public async Task<ActionResult<BaseResponseGeneric<bool>>> Register([FromBody] SubscriberDTO subscriberDTO)
         {
             var response = await _Weight_WatchersService.Register(subscriberDTO);
@@ -41,7 +42,7 @@ namespace Subscriber.WebApi.Controllers
         // POST api/<WeightWatchersController>
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<BaseResponseGeneric<int>>> Login([FromBody] string email,string password)
+        public async Task<ActionResult<BaseResponseGeneric<int>>> Login(string email,string password)
         {
             var response =await _Weight_WatchersService.Login(email, password);
             if(!response.Succeed)
