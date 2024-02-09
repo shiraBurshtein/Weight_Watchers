@@ -16,18 +16,15 @@ namespace Subscriber.WebApi.Config
         {
             try
             {
-                //string time = DateTime.Now.ToString("yyyy-MM-dd HH:ss:mm");
+               string time = DateTime.Now.ToString("yyyy-MM-dd HH:ss:mm");
 
-                //_looger.LogDebug($"start cell api {context.Request.Path} start in {time} s");
+                _looger.LogDebug($"start cell api {context.Request.Path} start in {time} s");
 
                 await next(context);
 
-                //string time2 = DateTime.Now.ToString("yyyy-MM-dd HH:ss:mm");
+                string time2 = DateTime.Now.ToString("yyyy-MM-dd HH:ss:mm");
 
-                _looger.LogInformation($"the function: {context.Request.Method} finished ");
-
-
-
+                _looger.LogInformation($"the function: {context.Request.Method} finished  in {time2} s");
             }
             catch (Exception ex)
             {
@@ -36,8 +33,6 @@ namespace Subscriber.WebApi.Config
         }
         private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-
-
             var result = JsonConvert.SerializeObject(new { error = ex.Message });
             //context.Response.ContentType = "application/json";            
             return context.Response.WriteAsync(result);
