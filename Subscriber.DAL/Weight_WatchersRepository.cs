@@ -18,7 +18,7 @@ namespace Subscriber.DAL
         {
             _weightWatchersContext = weightWatchersContext;
         }
-        public Task<BaseResponseGeneric<CardResponse>> GetCardDetails(int id)
+        public  async Task<BaseResponseGeneric<CardResponse>> GetCardDetails(int id)
         {
             try
             {
@@ -52,15 +52,15 @@ namespace Subscriber.DAL
                     response.Succeed = false;
                     response.Status = "failed to find card";
                 }
-                //     return response;
-                return null;
+              return response;
+
             }
             catch (Exception ex)
             {
                 throw new Exception("Get card Failed");
-            }
+            }  
         }
-        public Task<BaseResponseGeneric<int>> Login(string email,string password)
+        public async Task<BaseResponseGeneric<int>> Login(string email,string password)
         {
             try
             {
@@ -89,8 +89,8 @@ namespace Subscriber.DAL
                     response.Status = "failed to find subscriber";
                 }
 
-              //  return response;
-                return null;
+            return response;
+ 
             }
             catch (Exception ex)
             {
@@ -117,14 +117,15 @@ namespace Subscriber.DAL
                 await _weightWatchersContext.SaveChangesAsync();
                 response.Succeed = true;
                 response.Response = true;
-                response.Status = "succeed";
+                response.Status = "succeed"; 
+                return response;
             }
             catch (Exception ex)
             {
                 throw new Exception("Register Failed");
             }  
-         //   return response;
-            return null;
+      
+    
         }
         public async Task<bool> IsEmailExists(string email)
         {
